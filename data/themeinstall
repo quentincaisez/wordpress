@@ -43,14 +43,14 @@ fi
 read -p 'voulez vous activé un thème ? oui / non : ' themeactive
 if [ $themeactive = 'oui' ]
 then
-    read -p 'Pour activer le thème mettez le slug correspondant au nom ?  :' activate
+    read -p 'Pour activer le thème mettez le nom correspondant au nom ?  :' activate
     wp theme activate $activate
     wp theme list 
 else
    echo "vous n'avez pas activé de thème"
    wp theme list  
 fi
-read -p 'Voulez-vous recommencer ?' recom
+read -p 'Voulez-vous recommencer ? oui / non : ' recom
 if [ $recom = 'oui' ]
 then    
     i=0
