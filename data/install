@@ -1,0 +1,20 @@
+#!/bin/bash
+cd /var/www/html
+sudo apt-get install apache2 -y
+sudo apt-get install php7.0 -y
+sudo apt-get install php7.0-mysql -y
+sudo apt-get install libapache2-mod-php7.0 -y
+
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod 777 wp-cli.phar
+sudo mv wp-cli.phar /usr/local/bin/wp
+read -p 'Entrez votre nom du site : ' nom
+read -p 'Entrez votre nom dutilisateur : ' util
+read -p 'Entrez votre mot de passe admin : ' mdp
+read -p 'Entrez votre titre : ' titre
+wp core download
+wp config create --dbname=$nom  --dbuser=$util  --dbpass=$mdp
+wp core install  --url=192.168.33.10 --title=$titre --admin_user=root --admin_email=admin@admin.fr
+rm index.html
+
+

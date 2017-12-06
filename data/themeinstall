@@ -1,0 +1,62 @@
+
+for ((i=0 ; $i <=1; i++))
+do
+echo Voici les thèmes installés par défauts
+wp theme list
+read -p 'Entrez le theme que vous vouler rechercher : ' theme
+echo 'voici les thèmes correspondant à votre recherche'
+wp theme search $theme
+read -p 'Voulez vous refaire une recherche de theme ? oui / non  :' rep 
+if [ $rep = "oui" ]
+then
+        read -p 'Entrez le theme que vous vouler rechercher : ' theme
+	wp theme search $theme
+	echo "vous avez choisi le theme : "
+	echo $theme
+else
+        echo "Vous restez sur le theme :  "
+	echo $theme
+fi
+
+read -p 'Voulez vous ajouter un thème ? oui / non : ' response
+if [ $response = 'oui' ]
+then
+     read -p 'Pour ajouter le thème mettez le slug correspondant au nom ?  : ' ajoutth
+     wp theme install $ajoutth
+     wp theme list
+else
+     echo "vous n'avez pas ajouté de thème"
+     wp theme list
+fi
+
+read -p 'voulez vous supprimer un thème ? oui / non : ' responsedelete
+if [ $responsedelete = 'oui' ]
+then
+    read -p 'Pour supprimer un theme le thème mettez le nom correspondant ?  :' sup
+    wp theme delete $sup
+    wp theme list
+else 
+    echo "vous n'avez pas supprimé de thème"
+    wp theme list
+fi
+
+read -p 'voulez vous activé un thème ? oui / non : ' themeactive
+if [ $themeactive = 'oui' ]
+then
+    read -p 'Pour activer le thème mettez le slug correspondant au nom ?  :' activate
+    wp theme activate $activate
+    wp theme list 
+else
+   echo "vous n'avez pas activé de thème"
+   wp theme list  
+fi
+read -p 'Voulez-vous recommencer ?' recom
+if [ $recom = 'oui' ]
+then    
+    i=0
+else
+    i=1
+fi
+done
+
+
